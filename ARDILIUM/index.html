@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ARDILIUM</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+  <div id="login-page">
+    <h2>ARDILIUM</h2>
+    <input type="text" id="usernameInput" placeholder="Your name" />
+    <button id="nextBtn">Next</button>
+  </div>
+
+  <!-- Profile Selection -->
+  <div id="profile-selection" class="hidden">
+    <h2>Choose Your Profile</h2>
+    <div class="profile-options">
+      <img src="Youtube Profile Pictures Gaming.jpg" class="profile-choice" data-img="Youtube Profile Pictures Gaming.jpg" />
+      <img src="youtube1.jpg" class="profile-choice" data-img="youtube1.jpg" />
+      <img src="youtube2.jpg" class="profile-choice" data-img="youtube2.jpg" />
+    </div>
+  </div>
+
+  <!-- Loading Screen -->
+  <div id="loading-screen" style="display: none; background: black; color: white; justify-content: center; align-items: center; flex-direction: column; height: 100vh;">
+    <img src="q.jpg" alt="Loading image">
+    <p>Loading...</p>
+  </div>
+
+  <!-- App Content -->
+  <div id="app" style="display: none;">
+    <header style="background-color: black;">
+      <h1>ARDILIUM</h1>
+      <div class="top-icons">
+        <button id="darkToggle">🌓</button>
+        <a href="message.html"><button id="messageBtn">💬</button></a>
+      </div>
+    </header>
+
+    <div id="pages">
+      <section id="homePage" class="page">
+        <section class="stories-wrapper">
+          <button class="arrow left" onclick="scrollStories(-1)">&#10094;</button>
+          <div class="stories" id="storyContainer">
+            <div class="story" onclick="openStoryViewer(0)">
+              <img src="q.jpg" alt="Story 1" />
+            </div>
+            <div class="story" onclick="openStoryViewer(1)">
+              <img src="netflix.jpg" alt="Story 2" />
+            </div>
+            <div class="story" onclick="openStoryViewer(2)">
+              <img src="kirtry.jpg" alt="Video Story" />
+            </div>
+            <div class="story" onclick="openStoryViewer(3)">
+              <img src="nani.jpg" alt="Story 1" />
+            </div>
+            <div class="story" onclick="openStoryViewer(4)">
+              <img src="akhyakumar.jpg" alt="Story 1" />
+            </div>
+            <div class="story" onclick="openStoryViewer(5)">
+              <img src="nabeen.jpg" alt="Story 1" />
+            </div>
+            <div class="story" onclick="openStoryViewer(6)">
+              <img src="apple.jpg" alt="Story 1" />
+            </div>
+          </div>
+          <button class="arrow right" onclick="scrollStories(1)">&#10095;</button>
+        </section>
+        <section class="feed-container">
+          <section class="feed" id="postFeed">
+            <div class="post" data-id="post1">
+              <img class="post-img" src="q.jpg" alt="Post 1" />
+              <div class="post-actions">
+                <button onclick="likePost('post1')">❤️ Like (<span id="likes-post1">0</span>)</button>
+                <button onclick="toggleCommentBox(this)">💬 Comment</button>
+                <button onclick="sharePost('q.jpg')">🔗 Share</button>
+              </div>
+              <div class="comments">
+                <input type="text" placeholder="Add a comment..." onkeydown="addComment(event, this, 'post1')" />
+                <div class="comment-list" id="comments-post1"></div>
+              </div>
+            </div>
+            <div class="post" data-id="post2">
+              <img class="post-img" src="kirtry.jpg" alt="Post 2" />
+              <div class="post-actions">
+                <button onclick="likePost('post2')">❤️ Like (<span id="likes-post2">0</span>)</button>
+                <button onclick="toggleCommentBox(this)">💬 Comment</button>
+                <button onclick="sharePost('kirtry.jpg')">🔗 Share</button>
+              </div>
+              <div class="comments">
+                <input type="text" placeholder="Add a comment..." onkeydown="addComment(event, this, 'post2')" />
+                <div class="comment-list" id="comments-post2"></div>
+              </div>
+            </div>
+      
+            <div class="post" data-id="post3">
+              <video controls class="post-img"><source src="kirty.mp4" /></video>
+              <div class="post-actions">
+                <button onclick="likePost('post2')">❤️ Like (<span id="likes-post2">0</span>)</button>
+                <button onclick="toggleCommentBox(this)">💬 Comment</button>
+                <button onclick="sharePost('media/post3.mp4')">🔗 Share</button>
+              </div>
+              <div class="comments">
+                <input type="text" placeholder="Add a comment..." onkeydown="addComment(event, this, 'post3')" />
+                <div class="comment-list" id="comments-post2"></div>
+              </div>
+            </div>
+            <div class="post" data-id="post4">
+              <img class="post-img" src="nani.jpg" alt="Post 1" />
+              <div class="post-actions">
+                <button onclick="likePost('post1')">❤️ Like (<span id="likes-post4">0</span>)</button>
+                <button onclick="toggleCommentBox(this)">💬 Comment</button>
+                <button onclick="sharePost('nani.jpg')">🔗 Share</button>
+              </div>
+              <div class="comments">
+                <input type="text" placeholder="Add a comment..." onkeydown="addComment(event, this, 'post4')" />
+                <div class="comment-list" id="comments-post1"></div>
+              </div>
+            </div>
+            <div class="post" data-id="post5">
+              <video controls class="post-img"><source src="elementa.mp4" /></video>
+              <div class="post-actions">
+                <button onclick="likePost('post2')">❤️ Like (<span id="likes-post2">0</span>)</button>
+                <button onclick="toggleCommentBox(this)">💬 Comment</button>
+                <button onclick="sharePost('elementa.mp4')">🔗 Share</button>
+              </div>
+              <div class="comments">
+                <input type="text" placeholder="Add a comment..." onkeydown="addComment(event, this, 'post5')" />
+                <div class="comment-list" id="comments-post5"></div>
+              </div>
+            </div>
+            <div class="post" data-id="post6">
+              <img class="post-img" src="apple.jpg" alt="Post 6" />
+              <div class="post-actions">
+                <button onclick="likePost('post1')">❤️ Like (<span id="likes-post5">0</span>)</button>
+                <button onclick="toggleCommentBox(this)">💬 Comment</button>
+                <button onclick="sharePost('apple.jpg')">🔗 Share</button>
+              </div>
+              <div class="comments">
+                <input type="text" placeholder="Add a comment..." onkeydown="addComment(event, this, 'post6')" />
+                <div class="comment-list" id="comments-post6"></div>
+              </div>
+            </div>
+            <div class="post" data-id="post6">
+              <img class="post-img" src="akhyakumar.jpg" alt="Post 7" />
+              <div class="post-actions">
+                <button onclick="likePost('post1')">❤️ Like (<span id="likes-post6">0</span>)</button>
+                <button onclick="toggleCommentBox(this)">💬 Comment</button>
+                <button onclick="sharePost('akhyakumar.jpg')">🔗 Share</button>
+              </div>
+              <div class="comments">
+                <input type="text" placeholder="Add a comment..." onkeydown="addComment(event, this, 'post7')" />
+                <div class="comment-list" id="comments-post7"></div>
+              </div>
+            </div>
+          </section>
+        </section>
+      </section>
+
+      <section id="messagesPage" class="page hidden">
+        <h2>📩 Messages</h2>
+        <p>No messages yet.</p>
+      </section>
+      
+      <section id="searchPage" class="page hidden">
+        <div class="search-container">
+          <input type="text" id="searchInput" placeholder="Search..." />
+          <button id="searchBtn">🔍</button>
+        </div>
+        
+        <div class="photo-grid">
+          <div class="photo-item">
+            <img src="q.jpg" alt="Photo 1" loading="lazy">
+            <div class="photo-overlay">Explore</div>
+          </div>
+          <div class="photo-item">
+            <img src="netflix.jpg" alt="Photo 2" loading="lazy">
+            <div class="photo-overlay">Explore</div>
+          </div>
+          <div class="photo-item">
+            <img src="kirtry.jpg" alt="Photo 3" loading="lazy">
+            <div class="photo-overlay">Explore</div>
+          </div>
+          <div class="photo-item">
+            <img src="nani.jpg" alt="Photo 4" loading="lazy">
+            <div class="photo-overlay">Explore</div>
+          </div>
+          <div class="photo-item">
+            <img src="apple.jpg" alt="Photo 5" loading="lazy">
+            <div class="photo-overlay">Explore</div>
+          </div>
+          <div class="photo-item">
+            <img src="akhyakumar.jpg" alt="Photo 6" loading="lazy">
+            <div class="photo-overlay">Explore</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="reelsPage" class="page hidden">
+        <div class="reels-viewport">
+          <div class="reel-container">
+            <!-- Reel 1 -->
+            <div class="reel">
+              <video class="reel-video" loop>
+                <source src="kirty.mp4" type="video/mp4">
+              </video>
+              <div class="reel-actions">
+                <button class="reel-action-btn" onclick="likeReel(this)">
+                  <span class="icon">❤️</span>
+                  <span class="count">1.2k</span>
+                </button>
+                <button class="reel-action-btn" onclick="toggleReelComment(this)">
+                  <span class="icon">💬</span>
+                  <span class="count">324</span>
+                </button>
+                <button class="reel-action-btn" onclick="shareReel(this)">
+                  <span class="icon">↗️</span>
+                  <span class="text">Share</span>
+                </button>
+                <button class="reel-action-btn" onclick="saveReel(this)">
+                  <span class="icon">🔖</span>
+                  <span class="text">Save</span>
+                </button>
+              </div>
+              <div class="reel-user-info">
+                <img src="kirtry.jpg" alt="User" class="reel-user-avatar">
+                <span class="reel-username">kriti shetty</span>
+              </div>
+            </div>
+            
+            <!-- Reel 2 -->
+            <div class="reel">
+              <video class="reel-video" loop>
+                <source src="nani.mp4" type="video/mp4">
+              </video>
+              <div class="reel-actions">
+                <button class="reel-action-btn" onclick="likeReel(this)">
+                  <span class="icon">❤️</span>
+                  <span class="count">5.7k</span>
+                </button>
+                <button class="reel-action-btn" onclick="toggleReelComment(this)">
+                  <span class="icon">💬</span>
+                  <span class="count">892</span>
+                </button>
+                <button class="reel-action-btn" onclick="shareReel(this)">
+                  <span class="icon">↗️</span>
+                  <span class="text">Share</span>
+                </button>
+                <button class="reel-action-btn" onclick="saveReel(this)">
+                  <span class="icon">🔖</span>
+                  <span class="text">Save</span>
+                </button>
+              </div>
+              <div class="reel-user-info">
+                <img src="nani.jpg" alt="User" class="reel-user-avatar">
+                <span class="reel-username">nani</span>
+              </div>
+            </div>
+            <div class="reel">
+              <video class="reel-video" loop>
+                <source src="q.mp4" type="video/mp4">
+              </video>
+              <div class="reel-actions">
+                <button class="reel-action-btn" onclick="likeReel(this)">
+                  <span class="icon">❤️</span>
+                  <span class="count">5.7k</span>
+                </button>
+                <button class="reel-action-btn" onclick="toggleReelComment(this)">
+                  <span class="icon">💬</span>
+                  <span class="count">892</span>
+                </button>
+                <button class="reel-action-btn" onclick="shareReel(this)">
+                  <span class="icon">↗️</span>
+                  <span class="text">Share</span>
+                </button>
+                <button class="reel-action-btn" onclick="saveReel(this)">
+                  <span class="icon">🔖</span>
+                  <span class="text">Save</span>
+                </button>
+              </div>
+              <div class="reel-user-info">
+                <img src="q.jpg" alt="User" class="reel-user-avatar">
+                <span class="reel-username">ARDILIUM</span>
+              </div>
+            </div>
+            <div class="reel">
+              <video class="reel-video" loop>
+                <source src="elementa.mp4" type="video/mp4">
+              </video>
+              <div class="reel-actions">
+                <button class="reel-action-btn" onclick="likeReel(this)">
+                  <span class="icon">❤️</span>
+                  <span class="count">5.7k</span>
+                </button>
+                <button class="reel-action-btn" onclick="toggleReelComment(this)">
+                  <span class="icon">💬</span>
+                  <span class="count">892</span>
+                </button>
+                <button class="reel-action-btn" onclick="shareReel(this)">
+                  <span class="icon">↗️</span>
+                  <span class="text">Share</span>
+                </button>
+                <button class="reel-action-btn" onclick="saveReel(this)">
+                  <span class="icon">🔖</span>
+                  <span class="text">Save</span>
+                </button>
+              </div>
+              <div class="reel-user-info">
+                <img src="netflix.jpg" alt="User" class="reel-user-avatar">
+                <span class="reel-username">ELEMENTAL</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="profilePage" class="page hidden">
+        <h2 id="profileName">HI, </h2>
+        <img id="profilePhoto" src="" alt="Profile" class="profile-photo" />
+        <button id="logoutBtn">Log Out</button>
+      </section>
+    </div>
+
+    <nav class="bottom-nav">
+      <button class="nav-btn active" data-page="homePage">🏠</button>
+      <button class="nav-btn" data-page="searchPage">🔍</button>
+      <button class="nav-btn" data-page="reelsPage">📽️</button>
+      <button class="nav-btn" data-page="profilePage">👤</button>
+    </nav>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html> 

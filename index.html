@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ARDILIUM</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+  <div id="auth-page" class="auth-container">
+    <h2>ARDILIUM</h2>
+    
+    <!-- Register Form -->
+    <div id="register-form" style="display: none;">
+      <h3>Register</h3>
+      <input type="text" id="regName" placeholder="Your Name" required />
+      <input type="email" id="regEmail" placeholder="Email" required />
+      <input type="password" id="regPassword" placeholder="Password" required />
+      <button id="registerBtn">Register</button>
+      <div id="regError" class="error-msg"></div>
+      <p class="auth-switch">Already have an account? <span id="showLogin">Login</span></p>
+    </div>
+
+    <!-- Login Form -->
+    <div id="login-form">
+      <h3>Login</h3>
+      <input type="email" id="loginEmail" placeholder="Email" required />
+      <input type="password" id="loginPassword" placeholder="Password" required />
+      <button id="loginBtn">Login</button>
+      <div id="loginError" class="error-msg"></div>
+      <p class="auth-switch">Don't have an account? <span id="showRegister">Register</span></p>
+    </div>
+  </div>
+
+  <!-- Profile Selection -->
+  <div id="profile-selection" class="hidden">
+    <h2>Choose Your Profile</h2>
+    <div class="profile-options">
+      <img src="Youtube Profile Pictures Gaming.jpg" class="profile-choice" data-img="Youtube Profile Pictures Gaming.jpg" />
+      <img src="youtube1.jpg" class="profile-choice" data-img="youtube1.jpg" />
+      <img src="youtube2.jpg" class="profile-choice" data-img="youtube2.jpg" />
+    </div>
+  </div>
+
+  <!-- Loading Screen -->
+  <div id="loading-screen" style="display: none; background: black; color: white; justify-content: center; align-items: center; flex-direction: column; height: 100vh;">
+    <img src="q.jpg" alt="Loading image">
+    <p>Loading...</p>
+  </div>
+
+  <!-- App Content -->
+  <div id="app" style="display: none;">
+    <header class="app-header">
+      <h1 class="logo-text">ARDILIUM</h1>
+      <div class="top-icons">
+        <button id="darkToggle" title="Theme Toggle">🌓</button>
+        <button id="likeBtn" title="Notifications">❤️</button>
+        <a href="message.html"><button id="messageBtn" title="Messages">💬</button></a>
+      </div>
+    </header>
+
+    <div id="pages">
+      <section id="homePage" class="page">
+        <section class="stories-wrapper">
+          <button class="arrow left" onclick="scrollStories(-1)">&#10094;</button>
+          <div class="stories" id="storyContainer">
+            <!-- Stories will be injected here by JS -->
+          </div>
+          <button class="arrow right" onclick="scrollStories(1)">&#10095;</button>
+        </section>
+        <section class="feed-container">
+          <section class="feed" id="postFeed">
+            <!-- Posts will be injected here by JS -->
+          </section>
+          <button id="loadMoreFeedBtn" class="load-more-btn" onclick="loadMorePosts()">Load More Posts</button>
+        </section>
+      </section>
+
+      <section id="messagesPage" class="page hidden">
+        <h2>📩 Messages</h2>
+        <p>No messages yet.</p>
+      </section>
+      
+      <section id="searchPage" class="page hidden">
+        <div class="search-container">
+          <input type="text" id="searchInput" placeholder="Search..." />
+          <button id="searchBtn">🔍</button>
+        </div>
+        
+        <div class="photo-grid">
+          <div class="photo-item">
+            <img src="q.jpg" alt="Photo 1" loading="lazy">
+            <div class="photo-overlay">Explore</div>
+          </div>
+          <div class="photo-item">
+            <img src="netflix.jpg" alt="Photo 2" loading="lazy">
+            <div class="photo-overlay">Explore</div>
+          </div>
+          <div class="photo-item">
+            <img src="kirtry.jpg" alt="Photo 3" loading="lazy">
+            <div class="photo-overlay">Explore</div>
+          </div>
+          <div class="photo-item">
+            <img src="nani.jpg" alt="Photo 4" loading="lazy">
+            <div class="photo-overlay">Explore</div>
+          </div>
+          <div class="photo-item">
+            <img src="apple.jpg" alt="Photo 5" loading="lazy">
+            <div class="photo-overlay">Explore</div>
+          </div>
+          <div class="photo-item">
+            <img src="akhyakumar.jpg" alt="Photo 6" loading="lazy">
+            <div class="photo-overlay">Explore</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="reelsPage" class="page hidden">
+        <div class="reels-viewport">
+          <div class="reel-container" id="reelsContainer">
+            <!-- Reels will be injected here by JS -->
+          </div>
+          <button id="loadMoreReelsBtn" class="load-more-reels-btn" onclick="loadMoreReels()">Load More Reels</button>
+        </div>
+      </section>
+
+      <section id="profilePage" class="page hidden">
+        <h2 id="profileName">HI, </h2>
+        <img id="profilePhoto" src="" alt="Profile" class="profile-photo" />
+        <button id="logoutBtn">Log Out</button>
+      </section>
+
+      <section id="reviewsPage" class="page hidden">
+        <div class="reviews-header">
+          <h2> Reviews here</h2>
+          <p>Read what others are saying or leave your own thoughts!</p>
+        </div>
+        
+        <div class="review-compose">
+          <textarea id="reviewInput" placeholder="Write a review..." rows="3"></textarea>
+          <button id="submitReviewBtn">Post Review</button>
+        </div>
+        
+        <div id="reviewsContainer" class="reviews-container">
+          <!-- Reviews injected here via JS -->
+          <div class="loading-reviews">Loading reviews from the world...</div>
+        </div>
+      </section>
+    </div>
+
+    <nav class="bottom-nav">
+      <button class="nav-btn active" data-page="homePage" title="Home">
+        <svg aria-label="Home" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M9.005 16.545a2.997 2.997 0 0 1 2.997-2.997A2.997 2.997 0 0 1 15 16.545V22h7V11.543L12 2 2 11.543V22h7.005Z"></path></svg>
+      </button>
+      <button class="nav-btn" data-page="searchPage" title="Search">
+        <svg aria-label="Search" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M19 10.5A8.5 8.5 0 1 1 10.5 2a8.5 8.5 0 0 1 8.5 8.5Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="16.511" y1="16.511" x2="22" y2="22"></line></svg>
+      </button>
+      <button class="nav-btn" data-page="reelsPage" title="Reels">
+        <svg aria-label="Reels" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24"><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="2.049" y1="13.018" x2="21.956" y2="13.018"></line><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="2.049" y1="9.018" x2="21.956" y2="9.018"></line><rect fill="none" height="18" rx="2.5" ry="2.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="18" x="3" y="3"></rect><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="15.006" y1="9.018" x2="15.006" y2="13.018"></line><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="8.994" y1="9.018" x2="8.994" y2="13.018"></line></svg>
+      </button>
+      <button class="nav-btn" data-page="profilePage" title="Profile">
+        <img id="navProfilePic" src="youtube1.jpg" alt="Profile" style="width:24px; height:24px; border-radius:50%; object-fit:cover;">
+      </button>
+      <button class="nav-btn" data-page="reviewsPage" title="Reviews">
+        <svg aria-label="Comment" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+      </button>
+    </nav>
+  </div>
+
+  <script type="module" src="firebase-auth.js"></script>
+  <script src="index.js"></script>
+</body>
+</html> 
+
+
